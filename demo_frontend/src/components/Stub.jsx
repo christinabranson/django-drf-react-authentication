@@ -8,7 +8,7 @@ const Stub = ({ isLoggedIn }) => {
   useEffect(async () => {
     const loadStubData = async () => {
       try {
-        const response = await client(/stub/, {
+        const response = await client("/stub/", {
           method: "GET",
         });
         if (!response) return;

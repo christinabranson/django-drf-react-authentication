@@ -9,6 +9,10 @@ This app can serve as a template for future projects.
 
 ## Commit 1: Set up Django app & users
 
+This will set up our local Django app & our users.
+
+Follow along with code changes here: https://github.com/christinabranson/django-drf-react-authentication/commit/d0172a1f07c0eb43da85f2044f2a84939e566771
+
 1. Start a new Django app:
 
     1. Create an empty project directory
@@ -91,6 +95,11 @@ This app can serve as a template for future projects.
 We now have a functionality Django app with users!
 
 ## Commit 2: Set up DRF with Token authentication
+
+We'll be setting up our API here. This includes authentication methods & endpoints to allow our users to authenticate. We'll also be creating a 
+protected stub endpoint.
+
+Follow along with code changes here: https://github.com/christinabranson/django-drf-react-authentication/commit/0395fd17fa0ed0bfc6f6af8949ee4714f2ca2aba
 
 1. Install the necessary packages:
 
@@ -181,6 +190,8 @@ request headers in the future
     This process will only work if the user has authenticated & a valid access_token exists in local storage.
 
 From this point on, we're going to expect the Django web server is running.
+
+Follow along with code changes here: https://github.com/christinabranson/django-drf-react-authentication/commit/105a2d9b8898f1d1fbd0dbefaa0fd242a8a4a9a2
 
 1. Create a React app using:
 
