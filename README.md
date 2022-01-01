@@ -200,15 +200,25 @@ From this point on, we're going to expect the Django web server is running.
     From this point forward, its expected that we're working within the `demo_frontend`
     directory.
 
-2. Install Axios and define a generic api-client.js function:
+2. We need a robust way for the React app to communicate with the backend. It's possible to do everything here
+    using only the `fetch` API, but I'd like to create something a little more generalizble building on Axios.
+
+    Install Axios and define a generic API Client handler:
 
     ```bash
     yarn add axios
     ```
 
-    See an example api-client in `demo_frontend/src/utils/api-client.js`
+    See an example api-client in `demo_frontend/src/utils/api-client.js`.
 
-3. Implement a basic page to allow for authentication & access stub data. See the changes
+    Some useful things to note here are:
+    - Ease of use & flexibility. We can use this method for any HTTP type
+    - Authentication handling. If we have an `access_token` in local storage, we'll automatically be
+    adding it to our requests
+    - (Limited) error handling. A real functional app would probably have more complicated logic here, but this
+    will catch any errors and log them for us.
+
+3. Next, we'll implement a basic page to allow for authentication & access stub data. See the changes
     made in `demo_frontend/src/App.jsx`, `demo_frontend/src/components/Login.jsx`, and 
     `demo_frontend/src/components/Stub.jsx` for simplistic examples of authentication,
     managing user tokens, and data retrieval.
@@ -251,5 +261,8 @@ For the purposes of this tutorial, we're done. However there are a number of imp
 
 - The most important is the weak state management in the front end. Managing global state is a complicated problem and
 there are many possible solutions. [React Context](https://reactjs.org/docs/context.html) is a common solution.
+- Add better error handling in our `api-client`. Perhaps this could hook into whatever state management we created above
+to better handling HTTP or authentication errors from the backend
+  - Will our token ever expire? If so, how will we disable the existing user tokens on the front end?
 - Tests! The backend in particular has some functionality (user/user profile) & endpoint access in particular that are
 suspiciously untested.
