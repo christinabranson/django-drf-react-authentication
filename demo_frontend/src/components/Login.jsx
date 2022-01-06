@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import client from "../utils/api-client";
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+  let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState(null);
@@ -22,7 +24,8 @@ const Login = ({ onLogin }) => {
       if (response.key && response.key.length > 0) {
         /* SET ACCESS TOKEN IN LOCAL STORAGE */
         localStorage.setItem("access_token", response.key);
-        onLogin(true);
+        console.log("nagivating to stub...");
+        navigate("stub");
       }
     } catch (error) {
       console.error(error);
@@ -31,9 +34,12 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="card">
+    <>
+      <div className="card-header">
+        <h1 className="display-1">Login</h1>
+      </div>
       <div className="card-body">
-        <h2>
+        <h2 className="display-6">
           Log in with <code>/auth/login/</code> endpoint
         </h2>
         <p>
@@ -80,7 +86,7 @@ const Login = ({ onLogin }) => {
           <input type="submit" value="login" className="btn btn-primary" />
         </form>
       </div>
-    </div>
+    </>
   );
 };
 
