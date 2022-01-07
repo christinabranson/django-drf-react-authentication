@@ -270,10 +270,18 @@ capable of authenticating against a Django backend & retrieving JSON data from a
 
 For the purposes of this tutorial, we're done. However there are a number of improvements that can be made here.
 
-- The most important is the weak state management in the front end. Managing global state is a complicated problem and
-there are many possible solutions. [React Context](https://reactjs.org/docs/context.html) is a common solution.
+- ~~The most important is the weak state management in the front end. Managing global state is a complicated problem and
+there are many possible solutions. [React Context](https://reactjs.org/docs/context.html) is a common solution.~~
 - Add better error handling in our `api-client`. Perhaps this could hook into whatever state management we created above
 to better handling HTTP or authentication errors from the backend
   - Will our token ever expire? If so, how will we disable the existing user tokens on the front end?
 - Tests! The backend in particular has some functionality (user/user profile) & endpoint access in particular that are
 suspiciously untested.
+
+## Bonus functionality: Using React Routing & React Context to handle user authentication
+
+The front end code now contains the following:
+
+- Example layouts to provice different wrappers depending on content type (public & private routes in this case)
+- React routing to navigate between the Login & Stub components
+- A React Context implementation to better handle authentication state
