@@ -285,3 +285,5 @@ The front end code now contains the following:
 - Example layouts to provice different wrappers depending on content type (public & private routes in this case)
 - React routing to navigate between the Login & Stub components
 - A React Context implementation to better handle authentication state
+
+Follow along with code changes here: https://github.com/christinabranson/django-drf-react-authentication/commit/8ff11f73b6d9713baa5bd76e471f7eec6f3fab3e
