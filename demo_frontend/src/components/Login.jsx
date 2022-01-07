@@ -1,37 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import client from "../utils/api-client";
+import { useAuthDispatch, useAuthState, loginUser } from "../userContext";
 
 const Login = () => {
-  let navigate = useNavigate();
+  const authState = useAuthState();
+  const dispatch = useAuthDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState(null);
+
+  useEffect(() => {
+    /* If our authState shows we're authenticated, navigate to stub instead of login form */
+    if (authState.isAuthenticated) {
+      navigateToStub();
+    }
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorText(null);
     try {
-      const response = await client("/auth/login/", {
-        method: "POST",
-        data: {
-          email: email,
-          password: password,
-        },
+      const wasLoginSuccessful = await loginUser(dispatch, {
+        email: email,
+        password: password,
       });
-      if (!response) return;
+      if (!wasLoginSuccessful) return;
 
-      if (response.key && response.key.length > 0) {
-        /* SET ACCESS TOKEN IN LOCAL STORAGE */
-        localStorage.setItem("access_token", response.key);
-        console.log("nagivating to stub...");
-        navigate("stub");
-      }
+      navigateToStub();
     } catch (error) {
       console.error(error);
       setErrorText("Error logging in!");
     }
   };
+
+  const navigateToStub = () => navigate("stub");
 
   return (
     <>

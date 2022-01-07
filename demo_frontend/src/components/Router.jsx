@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useAuthState } from "../userContext";
 import PublicLayout from "./Layout/PublicLayout";
 import PrivateLayout from "./Layout/PrivateLayout";
 import Login from "./Login";
 import Stub from "./Stub";
 
 const PrivateRoute = ({ children }) => {
-  const auth = true; // TODO will implement user context auth in the next commit
-  if (!auth) {
+  const authState = useAuthState();
+  if (!authState.isAuthenticated) {
     return <Navigate to="/" />;
   }
 
